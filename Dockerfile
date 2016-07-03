@@ -19,7 +19,7 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
   && apk del --purge build-deps
 
 RUN apk-install openjdk8-jre
-RUN apk-install libzmq
+RUN apk-install libzmq bash
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
   && wget -O logstash-$LOGSTASH.tar.gz https://download.elastic.co/logstash/logstash/logstash-$LOGSTASH.tar.gz \
@@ -45,6 +45,8 @@ RUN set -ex \
 VOLUME ["/etc/logstash/conf.d"]
 
 COPY entrypoints/logstash-entrypoint.sh /
+RUN chmod +x /logstash-entrypoint.sh
+
 ENTRYPOINT ["/logstash-entrypoint.sh"]
 
 CMD ["-e", ""]
