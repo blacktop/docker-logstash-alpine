@@ -1,3 +1,5 @@
+![logstash-logo](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/logstash-logo.png)
+
 docker-logstash-alpine
 ======================
 
@@ -5,9 +7,26 @@ docker-logstash-alpine
 
 Alpine Linux based Logstash Docker Image
 
+### Why?
+
+Compare Image Sizes:  
+ - official logstash = 459 MB  
+ - blacktop/logstash = 254 MB
+
+**Alpine version is 205 MB smaller !**
+
 ### Dependencies
 
 -	[gliderlabs/alpine](https://index.docker.io/_/gliderlabs/alpine/)
+
+### Image Tags
+
+```bash
+$ docker images
+
+REPOSITORY                    TAG                 VIRTUAL SIZE
+blacktop/logstash             latest              254   MB
+```
 
 ### Usage
 
