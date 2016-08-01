@@ -2,12 +2,15 @@ FROM gliderlabs/alpine
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-RUN apk-install openjdk8-jre tini
-
-# Grab *gosu* for easy step-down from root
 ENV GOSU_VERSION 1.7
 ENV GOSU_URL https://github.com/tianon/gosu/releases/download
+
+# Install java and tini
+RUN apk-install openjdk8-jre tini
+# Install gosu
 RUN apk-install -t build-deps wget ca-certificates gpgme \
+  && set -x \
+	&& echo "Grab *gosu* for easy step-down from root..." \
 	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64" \
 	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64.asc" \
 	&& export GNUPGHOME="$(mktemp -d)" \
@@ -21,13 +24,14 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
 ENV LOGSTASH 2.3.4
 
 RUN apk-install libzmq bash
+RUN mkdir -p /usr/local/lib \
+	&& ln -s /usr/lib/*/libzmq.so.3 /usr/local/lib/libzmq.so
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
   && wget -O logstash-$LOGSTASH.tar.gz https://download.elastic.co/logstash/logstash/logstash-$LOGSTASH.tar.gz \
   && tar -xzf logstash-$LOGSTASH.tar.gz \
   && mv logstash-$LOGSTASH /usr/share/logstash \
   && adduser -DH -s /sbin/nologin logstash \
-  && chown -R logstash:logstash /usr/share/logstash \
   && rm -rf /tmp/* \
   && apk del --purge build-deps
 
@@ -45,8 +49,7 @@ RUN set -ex \
 
 VOLUME ["/etc/logstash/conf.d"]
 
-COPY entrypoints/logstash-entrypoint.sh /
-RUN chmod +x /logstash-entrypoint.sh
+COPY logstash-entrypoint.sh /
 
 ENTRYPOINT ["/logstash-entrypoint.sh"]
 

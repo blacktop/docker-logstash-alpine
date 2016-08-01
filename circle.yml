@@ -1,0 +1,29 @@
+machine:
+  services:
+    - docker
+
+general:
+  build_dir: "2.3"
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - docker info
+    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
+    - docker build -t blacktop_logstash .
+    - mkdir -p ~/docker; docker save blacktop_logstash > ~/docker/image.tar
+
+test:
+  override:
+    - docker run -it --rm blacktop_logstash logstash -e 'input { stdin { } } output { stdout { } }'
+
+deployment:
+  # master:
+  #   branch: master
+  #   commands:
+  #     - eval $(docker run gliderlabs/pagebuilder circleci-cmd)
+  release:
+    branch: release
+    commands:
+      - make release
