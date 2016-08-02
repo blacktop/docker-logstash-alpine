@@ -16,7 +16,7 @@ dependencies:
 
 test:
   override:
-    - docker run -it --rm blacktop_logstash logstash -e 'input { stdin { } } output { stdout { } }'
+    - docker run -d blacktop_logstash logstash -e 'input { http { } } output { stdout { codec => line { format => "%{message}" }} }'
 
 deployment:
   # master:
