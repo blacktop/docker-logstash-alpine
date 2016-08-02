@@ -32,7 +32,6 @@ RUN apk-install -t build-deps wget ca-certificates \
   && tar -xzf logstash-$LOGSTASH.tar.gz \
   && mv logstash-$LOGSTASH /usr/share/logstash \
   && adduser -DH -s /sbin/nologin logstash \
-  && chown -R logstash:logstash /usr/share/logstash \
   && rm -rf /tmp/* \
   && apk del --purge build-deps
 
@@ -50,8 +49,7 @@ RUN set -ex \
 
 VOLUME ["/etc/logstash/conf.d"]
 
-COPY entrypoints/logstash-entrypoint.sh /
-RUN chmod +x /logstash-entrypoint.sh
+COPY logstash-entrypoint.sh /
 
 ENTRYPOINT ["/logstash-entrypoint.sh"]
 
