@@ -24,8 +24,11 @@ Compare Image Sizes:
 ### Image Tags
 
 ```bash
-REPOSITORY                    TAG                 VIRTUAL SIZE
-blacktop/logstash             latest              254   MB
+REPOSITORY          TAG                 SIZE
+blacktop/logstash   latest              258.5 MB
+blacktop/logstash   5.0                 291.7 MB
+blacktop/logstash   2.3                 258.5 MB
+blacktop/logstash   1.5                 256.2 MB
 ```
 
 ### Getting Started
