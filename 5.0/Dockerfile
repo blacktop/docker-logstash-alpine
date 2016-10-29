@@ -2,7 +2,7 @@ FROM gliderlabs/alpine:3.4
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-ENV GOSU_VERSION 1.7
+ENV GOSU_VERSION 1.10
 ENV GOSU_URL https://github.com/tianon/gosu/releases/download
 
 # Install java and tini
@@ -21,19 +21,19 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
 	&& gosu nobody true \
   && apk del --purge build-deps
 
-ENV LOGSTASH 5.0.0-alpha4
+ENV LOGSTASH 5.0.0
 
 RUN apk-install libzmq bash
 RUN mkdir -p /usr/local/lib \
 	&& ln -s /usr/lib/*/libzmq.so.3 /usr/local/lib/libzmq.so
-RUN apk-install -t build-deps wget ca-certificates \
+RUN apk-install -t .build-deps wget ca-certificates \
   && cd /tmp \
-  && wget -O logstash-$LOGSTASH.tar.gz https://download.elastic.co/logstash/logstash/logstash-$LOGSTASH.tar.gz \
+  && wget -O logstash-$LOGSTASH.tar.gz https://artifacts.elastic.co/downloads/logstash/logstash-$LOGSTASH.tar.gz \
   && tar -xzf logstash-$LOGSTASH.tar.gz \
   && mv logstash-$LOGSTASH /usr/share/logstash \
   && adduser -DH -s /sbin/nologin logstash \
   && rm -rf /tmp/* \
-  && apk del --purge build-deps
+  && apk del --purge .build-deps
 
 ENV PATH /usr/share/logstash/bin:$PATH
 
@@ -52,5 +52,4 @@ VOLUME ["/etc/logstash/conf.d"]
 COPY logstash-entrypoint.sh /
 
 ENTRYPOINT ["/logstash-entrypoint.sh"]
-
 CMD ["-e", ""]

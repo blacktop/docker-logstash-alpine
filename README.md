@@ -5,17 +5,17 @@ docker-logstash-alpine
 
 [![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/)
-[![Docker Image](https://img.shields.io/badge/docker image-258.5 MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
+[![Docker Image](https://img.shields.io/badge/docker image-313.3 MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
 
 Alpine Linux based Logstash Docker Image
 
 ### Why?
 
 Compare Image Sizes:  
- - official logstash = 459 MB  
- - blacktop/logstash = 254 MB
+ - official logstash = 516 MB  
+ - blacktop/logstash = 313 MB
 
-**Alpine version is 205 MB smaller !**
+**Alpine version is 404 MB smaller !**
 
 ### Dependencies
 
