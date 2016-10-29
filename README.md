@@ -15,7 +15,7 @@ Compare Image Sizes:
  - official logstash = 516 MB  
  - blacktop/logstash = 313 MB
 
-**Alpine version is 404 MB smaller !**
+**Alpine version is 203 MB smaller !**
 
 ### Dependencies
 
@@ -25,8 +25,9 @@ Compare Image Sizes:
 
 ```bash
 REPOSITORY          TAG                 SIZE
-blacktop/logstash   latest              258.5 MB
-blacktop/logstash   5.0                 291.7 MB
+blacktop/logstash   latest              313.3 MB
+blacktop/logstash   5.0                 313.3 MB
+blacktop/logstash   2.4                 259.7 MB
 blacktop/logstash   2.3                 258.5 MB
 blacktop/logstash   1.5                 256.2 MB
 ```
