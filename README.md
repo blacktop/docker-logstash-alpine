@@ -66,6 +66,12 @@ $ ./metricbeat -e -c metricbeat.yml
 
 > Navigate to [http://localhost:5601](http://localhost:5601)
 
+Click on `metricbeat-*` and **Set as default index**   
+
+![index](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/index.png)
+
+Click on **Dashboard** -> **Open** -> `Metricbeat-cpu`  
+
 ![kibana](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/kibana.png)
 
 ### Documentation
