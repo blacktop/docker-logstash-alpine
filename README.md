@@ -34,6 +34,12 @@ blacktop/logstash   1.5                 256.2 MB
 
 ### Getting Started
 
+Start Logstash with configuration file
+
+```bash
+$ docker run -d -v "$PWD":/config-dir blacktop/logstash logstash -f /config-dir/logstash.conf
+```
+
 Start Logstash with commandline configuration. Download [metricbeat](https://www.elastic.co/downloads/beats/metricbeat)  
 
 ```bash
@@ -60,11 +66,7 @@ $ ./metricbeat -e -c metricbeat.yml
 
 > Navigate to [http://localhost:5601](http://localhost:5601)
 
-Start Logstash with configuration file
-
-```bash
-$ docker run -d -v "$PWD":/config-dir blacktop/logstash logstash -f /config-dir/logstash.conf
-```
+![kibana](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/kibana.png)
 
 ### Documentation
 
