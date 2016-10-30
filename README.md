@@ -38,6 +38,7 @@ Start Logstash with commandline configuration. Download [metricbeat](https://www
 
 ```bash
 $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
+$ docker run -d --name kibana --link elastic:elasticsearch -p 5601:5601 blacktop/kibana
 $ docker run -d --name logstash -p 5044:5044 --link elastic:elasticsearch blacktop/logstash \
   logstash -e 'input {
                   beats {
@@ -53,8 +54,11 @@ $ docker run -d --name logstash -p 5044:5044 --link elastic:elasticsearch blackt
                    document_type => "%{[@metadata][type]}"
                  }
                }'
+$ ./scripts/import_dashboards               
 $ ./metricbeat -e -c metricbeat.yml               
 ```
+
+> Navigate to [http://localhost:5601](http://localhost:5601)
 
 Start Logstash with configuration file
 
