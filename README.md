@@ -66,7 +66,7 @@ $ ./metricbeat -e -c metricbeat.yml
 
 > Navigate to [http://localhost:5601](http://localhost:5601)
 
-Click on `metricbeat-*` and **Set as default index**   
+Click on `metricbeat-*` and :star: **Set as default index**   
 
 ![index](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/index.png)
 
