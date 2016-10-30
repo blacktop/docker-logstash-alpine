@@ -36,14 +36,15 @@ blacktop/logstash   1.5                 256.2 MB
 
 Start Logstash with commandline configuration
 
-```
-docker run -it --rm blacktop/logstash logstash -e 'input { stdin { } } output { stdout { } }'
+```bash
+$ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
+$ docker run -d --link elastic:elasticsearch blacktop/logstash logstash -e 'input { stdin { } } output { elasticsearch { hosts => ["elasticsearch:9200"] } stdout { codec => rubydebug } }'
 ```
 
 Start Logstash with configuration file
 
-```
-docker run -it --rm -v "$PWD":/config-dir blacktop/logstash logstash -f /config-dir/logstash.conf
+```bash
+$ docker run -d -v "$PWD":/config-dir blacktop/logstash logstash -f /config-dir/logstash.conf
 ```
 
 ### Documentation

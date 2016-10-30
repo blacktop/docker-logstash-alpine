@@ -10,22 +10,22 @@ RUN apk-install openjdk8-jre tini
 # Install gosu
 RUN apk-install -t build-deps wget ca-certificates gpgme \
   && set -x \
-	&& echo "Grab *gosu* for easy step-down from root..." \
-	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64" \
-	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64.asc" \
-	&& export GNUPGHOME="$(mktemp -d)" \
-	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-	&& rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
-	&& chmod +x /usr/local/bin/gosu \
-	&& gosu nobody true \
+  && echo "Grab *gosu* for easy step-down from root..." \
+  && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64" \
+  && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64.asc" \
+  && export GNUPGHOME="$(mktemp -d)" \
+  && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+  && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+  && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+  && chmod +x /usr/local/bin/gosu \
+  && gosu nobody true \
   && apk del --purge build-deps
 
 ENV LOGSTASH 2.4.0
 
 RUN apk-install libzmq bash
 RUN mkdir -p /usr/local/lib \
-	&& ln -s /usr/lib/*/libzmq.so.3 /usr/local/lib/libzmq.so
+  && ln -s /usr/lib/*/libzmq.so.3 /usr/local/lib/libzmq.so
 RUN apk-install -t build-deps wget ca-certificates \
   && cd /tmp \
   && wget -O logstash-$LOGSTASH.tar.gz https://download.elastic.co/logstash/logstash/logstash-$LOGSTASH.tar.gz \
@@ -43,9 +43,9 @@ ENV LS_SETTINGS_DIR /etc/logstash
 #   path.log: logs should go to stdout
 #   path.config: No config files found: /etc/logstash/conf.d/*
 RUN set -ex \
-	&& if [ -f "$LS_SETTINGS_DIR/logstash.yml" ]; then \
-		sed -ri 's!^(path.log|path.config):!#&!g' "$LS_SETTINGS_DIR/logstash.yml"; \
-	fi
+  && if [ -f "$LS_SETTINGS_DIR/logstash.yml" ]; then \
+  	sed -ri 's!^(path.log|path.config):!#&!g' "$LS_SETTINGS_DIR/logstash.yml"; \
+  fi
 
 VOLUME ["/etc/logstash/conf.d"]
 
