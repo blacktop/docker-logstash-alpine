@@ -34,11 +34,26 @@ blacktop/logstash   1.5                 256.2 MB
 
 ### Getting Started
 
-Start Logstash with commandline configuration
+Start Logstash with commandline configuration. Download [metricbeat](https://www.elastic.co/downloads/beats/metricbeat)  
 
 ```bash
 $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
-$ docker run -d --link elastic:elasticsearch blacktop/logstash logstash -e 'input { stdin { } } output { elasticsearch { hosts => ["elasticsearch:9200"] } stdout { codec => rubydebug } }'
+$ docker run -d --name logstash -p 5044:5044 --link elastic:elasticsearch blacktop/logstash \
+  logstash -e 'input {
+                  beats {
+                    port => 5044
+                  }
+               }
+
+               output {
+                 elasticsearch {
+                   hosts => "elasticsearch:9200"
+                   manage_template => false
+                   index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+                   document_type => "%{[@metadata][type]}"
+                 }
+               }'
+$ ./metricbeat -e -c metricbeat.yml               
 ```
 
 Start Logstash with configuration file

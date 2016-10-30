@@ -35,7 +35,7 @@ RUN apk-install -t .build-deps wget ca-certificates \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
-ENV PATH /usr/share/logstash/bin:$PATH
+ENV PATH /usr/share/logstash/bin:/sbin:$PATH
 
 # necessary for 5.0+ (overriden via "--path.settings", ignored by < 5.0)
 ENV LS_SETTINGS_DIR /etc/logstash

@@ -9,8 +9,10 @@ fi
 
 # Run as user "logstash" if the command is "logstash"
 if [ "$1" = 'logstash' ]; then
-	chown -R logstash:logstash /usr/share/logstash
-		
+	chown -R elstack:elstack /usr/share/logstash
+	chown -R elstack:elstack /etc/logstash/conf.d/
+	chown -R elstack:elstack /opt/logstash/patterns
+
 	set -- gosu logstash tini -- "$@"
 fi
 
