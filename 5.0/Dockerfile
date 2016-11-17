@@ -21,7 +21,7 @@ RUN apk-install -t build-deps wget ca-certificates gpgme \
   && gosu nobody true \
   && apk del --purge build-deps
 
-ENV LOGSTASH 5.0.0
+ENV LOGSTASH 5.0.1
 
 RUN apk-install libzmq bash
 RUN mkdir -p /usr/local/lib \
