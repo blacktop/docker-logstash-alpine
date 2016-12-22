@@ -13,7 +13,7 @@ if [ "$1" = 'logstash' ]; then
 	chown -R logstash: /etc/logstash/conf.d/
 	# chown -R logstash: /opt/logstash/patterns
 
-	set -- gosu logstash tini -- "$@"
+	set -- su-exec logstash tini -- "$@"
 fi
 
 exec "$@"

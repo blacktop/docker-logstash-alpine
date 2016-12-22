@@ -5,7 +5,7 @@ docker-logstash-alpine
 
 [![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/)
-[![Docker Image](https://img.shields.io/badge/docker image-313.3 MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
+[![Docker Image](https://img.shields.io/badge/docker image-288.2 MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
 
 Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker Image
 
@@ -13,9 +13,9 @@ Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker I
 
 Compare Image Sizes:  
  - official logstash = 516 MB  
- - blacktop/logstash = 313 MB
+ - blacktop/logstash = 288 MB
 
-**Alpine version is 203 MB smaller !**
+**Alpine version is 228 MB smaller !**
 
 ### Dependencies
 
@@ -25,7 +25,8 @@ Compare Image Sizes:
 
 ```bash
 REPOSITORY          TAG                 SIZE
-blacktop/logstash   latest              313.3 MB
+blacktop/logstash   latest              288.2 MB
+blacktop/logstash   5.1                 288.2 MB
 blacktop/logstash   5.0                 313.3 MB
 blacktop/logstash   2.4                 259.7 MB
 blacktop/logstash   2.3                 258.5 MB

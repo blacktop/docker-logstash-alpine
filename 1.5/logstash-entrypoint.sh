@@ -10,8 +10,8 @@ fi
 # Run as user "logstash" if the command is "logstash"
 if [ "$1" = 'logstash' ]; then
 	chown -R logstash:logstash /usr/share/logstash
-		
-	set -- gosu logstash tini -- "$@"
+
+	set -- su-exec logstash tini -- "$@"
 fi
 
 exec "$@"
