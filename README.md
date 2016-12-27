@@ -27,10 +27,10 @@ Compare Image Sizes:
 REPOSITORY          TAG                 SIZE
 blacktop/logstash   latest              288.2 MB
 blacktop/logstash   5.1                 288.2 MB
-blacktop/logstash   5.0                 313.3 MB
-blacktop/logstash   2.4                 259.7 MB
-blacktop/logstash   2.3                 258.5 MB
-blacktop/logstash   1.5                 256.2 MB
+blacktop/logstash   5.0                 312.2 MB
+blacktop/logstash   2.4                 257.2 MB
+blacktop/logstash   2.3                 255.8 MB
+blacktop/logstash   1.5                 253.5 MB
 ```
 
 ### Getting Started
