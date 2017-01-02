@@ -4,35 +4,46 @@ MAINTAINER blacktop, https://github.com/blacktop
 
 RUN apk-install openjdk8-jre tini su-exec
 
-ENV LOGSTASH 5.1.1
+ENV LS_VERSION 5.1.1
+ENV LOGSTASH_URL "https://artifacts.elastic.co/downloads/logstash"
+ENV LOGSTASH_TARBALL "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz"
+ENV LOGSTASH_TARBALL_ASC "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz.asc"
+ENV LOGSTASH_TARBALL_SHA1 "5c88fdd5752d01a4076ee215bd2bb6e46de0d001"
+ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk-install libzmq bash
-RUN mkdir -p /usr/local/lib \
-  && ln -s /usr/lib/*/libzmq.so.3 /usr/local/lib/libzmq.so
-RUN apk-install -t .build-deps wget ca-certificates \
+RUN apk-install -t .build-deps wget ca-certificates gnupg openssl \
   && cd /tmp \
-  && wget -O logstash-$LOGSTASH.tar.gz https://artifacts.elastic.co/downloads/logstash/logstash-$LOGSTASH.tar.gz \
-  && tar -xzf logstash-$LOGSTASH.tar.gz \
-  && mv logstash-$LOGSTASH /usr/share/logstash \
+  && wget -O logstash.tar.gz "$LOGSTASH_TARBALL"; \
+  if [ "$LOGSTASH_TARBALL_SHA1" ]; then \
+		echo "$LOGSTASH_TARBALL_SHA1 *logstash.tar.gz" | sha1sum -c -; \
+	fi; \
+	\
+	if [ "$LOGSTASH_TARBALL_ASC" ]; then \
+		wget -O logstash.tar.gz.asc "$LOGSTASH_TARBALL_ASC"; \
+		export GNUPGHOME="$(mktemp -d)"; \
+		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY"; \
+		gpg --batch --verify logstash.tar.gz.asc logstash.tar.gz; \
+		rm -r "$GNUPGHOME" logstash.tar.gz.asc; \
+	fi; \
+  tar -xzf logstash.tar.gz \
+  && mv logstash-$LS_VERSION /usr/share/logstash \
   && adduser -DH -s /sbin/nologin logstash \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
 ENV PATH /usr/share/logstash/bin:/sbin:$PATH
 
-# necessary for 5.0+ (overriden via "--path.settings", ignored by < 5.0)
-ENV LS_SETTINGS_DIR /etc/logstash
-# comment out some troublesome configuration parameters
-#   path.log: logs should go to stdout
-#   path.config: No config files found: /etc/logstash/conf.d/*
-RUN set -ex \
-  && if [ -f "$LS_SETTINGS_DIR/logstash.yml" ]; then \
-  	sed -ri 's!^(path.log|path.config):!#&!g' "$LS_SETTINGS_DIR/logstash.yml"; \
-  fi
+ENV LS_SETTINGS_DIR /usr/share/logstash/config
+
+RUN set -ex; \
+  if [ -f "$LS_SETTINGS_DIR/log4j2.properties" ]; then \
+		cp "$LS_SETTINGS_DIR/log4j2.properties" "$LS_SETTINGS_DIR/log4j2.properties.dist"; \
+		truncate -s 0 "$LS_SETTINGS_DIR/log4j2.properties"; \
+	fi
 
 VOLUME ["/etc/logstash/conf.d"]
 
-COPY config/logstash/logstash.yml /etc/logstash/
 COPY logstash-entrypoint.sh /
 
 ENTRYPOINT ["/logstash-entrypoint.sh"]
