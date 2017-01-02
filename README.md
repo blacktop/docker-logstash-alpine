@@ -9,14 +9,6 @@ docker-logstash-alpine
 
 Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker Image
 
-### Why?
-
-Compare Image Sizes:  
- - official logstash = 516 MB  
- - blacktop/logstash = 288 MB
-
-**Alpine version is 228 MB smaller !**
-
 ### Dependencies
 
 -	[gliderlabs/alpine:3.4](https://index.docker.io/_/gliderlabs/alpine/)
