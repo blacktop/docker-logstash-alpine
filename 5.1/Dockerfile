@@ -38,9 +38,9 @@ ENV LS_SETTINGS_DIR /usr/share/logstash/config
 
 RUN set -ex; \
   if [ -f "$LS_SETTINGS_DIR/log4j2.properties" ]; then \
-		cp "$LS_SETTINGS_DIR/log4j2.properties" "$LS_SETTINGS_DIR/log4j2.properties.dist"; \
-		truncate -s 0 "$LS_SETTINGS_DIR/log4j2.properties"; \
-	fi
+    cp "$LS_SETTINGS_DIR/log4j2.properties" "$LS_SETTINGS_DIR/log4j2.properties.dist"; \
+    truncate -s 0 "$LS_SETTINGS_DIR/log4j2.properties"; \
+  fi
 
 VOLUME ["/etc/logstash/conf.d"]
 
