@@ -4,7 +4,7 @@ MAINTAINER blacktop, https://github.com/blacktop
 
 RUN apk-install openjdk8-jre tini su-exec
 
-ENV LS_VERSION 5.1.1
+ENV LS_VERSION 5.2.0
 ENV LOGSTASH_URL "https://artifacts.elastic.co/downloads/logstash"
 ENV LOGSTASH_TARBALL "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz"
 ENV LOGSTASH_TARBALL_ASC "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz.asc"
