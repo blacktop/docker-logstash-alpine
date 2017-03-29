@@ -1,8 +1,10 @@
 REPO=blacktop
 NAME=logstash
-BUILD ?= 5.1
-LATEST ?= 5.1
+BUILD ?= 5.3
+LATEST ?= 5.3
 NEWSIZE = $(shell docker images --format "{{.Size}}" $(REPO)/$(NAME):$(BUILD))
+
+all: build size
 
 build:
 	cd $(BUILD); docker build -t $(REPO)/$(NAME):$(BUILD) .

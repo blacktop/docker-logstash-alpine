@@ -4,11 +4,11 @@ MAINTAINER blacktop, https://github.com/blacktop
 
 RUN apk-install openjdk8-jre tini su-exec
 
-ENV LS_VERSION 5.2.0
+ENV LS_VERSION 5.2.2
 ENV LOGSTASH_URL "https://artifacts.elastic.co/downloads/logstash"
 ENV LOGSTASH_TARBALL "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz"
 ENV LOGSTASH_TARBALL_ASC "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz.asc"
-ENV LOGSTASH_TARBALL_SHA1 "5c88fdd5752d01a4076ee215bd2bb6e46de0d001"
+ENV LOGSTASH_TARBALL_SHA1 "20528f9d97e50917b994b4c9f26d518ec7249b8d"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk-install libzmq bash
