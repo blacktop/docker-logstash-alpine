@@ -11,7 +11,7 @@ Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker I
 
 ### Dependencies
 
--	[gliderlabs/alpine:3.4](https://index.docker.io/_/gliderlabs/alpine/)
+-	[alpine:3.5](https://index.docker.io/_/gliderlabs/alpine/)
 
 ### Image Tags
 
