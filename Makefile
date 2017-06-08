@@ -23,4 +23,7 @@ tags:
 test:
 	docker run --rm $(REPO)/$(NAME):$(BUILD)
 
-.PHONY: build size tags
+run:
+	docker run -d --name logstash -p 5044:5044 $(REPO)/$(NAME):$(BUILD)
+
+.PHONY: build size tags run
