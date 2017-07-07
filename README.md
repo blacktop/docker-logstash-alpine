@@ -5,20 +5,21 @@ docker-logstash-alpine
 
 [![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/)
-[![Docker Image](https://img.shields.io/badge/docker%20image-263MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
+[![Docker Image](https://img.shields.io/badge/docker%20image-265MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
 
 Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker Image
 
 ### Dependencies
 
--	[alpine:3.5](https://index.docker.io/_/gliderlabs/alpine/)
+-	[alpine:3.6](https://index.docker.io/_/gliderlabs/alpine/)
 
 ### Image Tags
 
 ```bash
 REPOSITORY          TAG                 SIZE
-blacktop/logstash   latest              263MB
+blacktop/logstash   latest              265MB
 blacktop/logstash   6.0                 275MB
+blacktop/logstash   5.5                 265MB
 blacktop/logstash   5.4                 263MB
 blacktop/logstash   5.3                 289MB
 blacktop/logstash   5.2                 289MB

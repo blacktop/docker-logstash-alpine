@@ -1,7 +1,7 @@
 REPO=blacktop
 NAME=logstash
-BUILD ?= 5.4
-LATEST ?= 5.4
+BUILD ?= 5.5
+LATEST ?= 5.5
 NEWSIZE = $(shell docker images --format "{{.Size}}" $(REPO)/$(NAME):$(BUILD))
 
 all: build size test

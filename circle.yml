@@ -3,7 +3,7 @@ machine:
     - docker
 
 general:
-  build_dir: "5.4"
+  build_dir: "5.5"
 
 dependencies:
   cache_directories:
@@ -16,6 +16,7 @@ dependencies:
 
 test:
   override:
+    - docker images blacktop_logstash
     - docker run -d blacktop_logstash logstash -e 'input { http { } } output { stdout { codec => line { format => "%{message}" }} }'
 
 deployment:
