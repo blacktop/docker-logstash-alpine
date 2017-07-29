@@ -41,6 +41,9 @@ RUN set -ex; \
     truncate -s 0 "$LS_SETTINGS_DIR/log4j2.properties"; \
   fi
 
+# Install X-Pack plugin
+RUN logstash-plugin install x-pack
+
 VOLUME ["/etc/logstash/conf.d"]
 
 COPY logstash-entrypoint.sh /
