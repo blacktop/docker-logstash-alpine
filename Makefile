@@ -21,8 +21,8 @@ endif
 tags:
 	docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" $(ORG)/$(NAME)
 
-test: ## Test docker image
-	@docker run --rm --name logstash -p 5044:5044 $(ORG)/$(NAME):$(BUILD) logstash -e 'input { http { } } output { stdout { codec => line { format => "%{message}" }} }'
+test: stop ## Test docker image
+	docker run -it --rm --name $(NAME) $(ORG)/$(NAME):$(BUILD) logstash -e 'input { http { } } output { stdout { codec => line { format => "%{message}" }} }'
 
 tar: ## Export tar of docker image
 	docker save $(ORG)/$(NAME):$(BUILD) -o $(NAME).tar
@@ -32,7 +32,7 @@ push: build ## Push docker image to docker registry
 	@docker push $(ORG)/$(NAME):$(BUILD)
 
 run: stop ## Run docker container
-	@docker run -d --name logstash -p 5044:5044 $(ORG)/$(NAME):$(BUILD)
+	@docker run -d --name $(NAME) -p 5044:5044 $(ORG)/$(NAME):$(BUILD)
 
 ssh: ## SSH into docker image
 	@docker run --init -it --rm --entrypoint=sh $(ORG)/$(NAME):$(BUILD)
