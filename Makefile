@@ -3,16 +3,17 @@
 REPO=blacktop/logstash
 ORG=blacktop
 NAME=logstash
-
+# build info
 BUILD ?=$(shell cat LATEST)
 LATEST ?=$(shell cat LATEST)
 VERSION=$(shell cat "$(BUILD)/Dockerfile" | grep '^ENV VERSION' | cut -d" " -f3)
-
-DOWNLOAD_URL=https://artifacts.elastic.co/downloads/kibana
-SHA1_URL=$(DOWNLOAD_URL)/kibana-$(VERSION)-linux-x86_64.tar.gz.sha1
+# tarball info
+DOWNLOAD_URL=https://artifacts.elastic.co/downloads/$(NAME)
+SHA1_URL=$(DOWNLOAD_URL)/$(NAME)-$(VERSION).tar.gz.sha1
 TARBALL_SHA1=$(shell curl -s "$(SHA1_URL)")
 
-all: build size test
+
+all: build size testmake
 
 dockerfile: ## Update Dockerfiles
 	@echo "===> Getting $(NAME) tarball sha1 for version: $(VERSION)"
