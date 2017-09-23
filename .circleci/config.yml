@@ -3,11 +3,11 @@ jobs:
   build:
     working_directory: /app
     docker:
-      - image: docker:17.06.0-ce-git
+      - image: docker:17.07.0-ce-git
     steps:
       - checkout
       - setup_remote_docker:
-          version: 17.06.0-ce
+          version: 17.07.0-ce
       - run:
           name: Install dependencies
           command: |
@@ -49,13 +49,3 @@ jobs:
           command: |
             set -x
             docker run -d app logstash -e 'input { http { } } output { stdout { codec => line { format => "%{message}" }} }'
-
-      # - deploy:
-      #     name: Push application Docker image
-      #     command: |
-      #       if [ "${CIRCLE_BRANCH}" == "master" ]; then
-      #         login="$(aws ecr get-login)"
-      #         ${login}
-      #         docker tag app "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
-      #         docker push "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
-      #       fi
