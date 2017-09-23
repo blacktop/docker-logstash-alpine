@@ -4,11 +4,11 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre tini su-exec
 
-ENV LS_VERSION 5.6.0
+ENV VERSION 5.6.1
 ENV LOGSTASH_URL "https://artifacts.elastic.co/downloads/logstash"
-ENV LOGSTASH_TARBALL "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz"
-ENV LOGSTASH_TARBALL_ASC "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz.asc"
-ENV LOGSTASH_TARBALL_SHA1 "6c1bce4456e76da87abb8104b76b2c7c41ed79f8"
+ENV LOGSTASH_TARBALL "$LOGSTASH_URL/logstash-${VERSION}.tar.gz"
+ENV LOGSTASH_TARBALL_ASC "$LOGSTASH_URL/logstash-${VERSION}.tar.gz.asc"
+ENV LOGSTASH_TARBALL_SHA1 "b6073de855a9f58e3bfe0856415132d49e3bd796"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache libzmq bash
@@ -27,7 +27,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
 		rm -r "$GNUPGHOME" logstash.tar.gz.asc; \
 	fi; \
   tar -xzf logstash.tar.gz \
-  && mv logstash-$LS_VERSION /usr/share/logstash \
+  && mv logstash-$VERSION /usr/share/logstash \
   && adduser -DH -s /sbin/nologin logstash \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
