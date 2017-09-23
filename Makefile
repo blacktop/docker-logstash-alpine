@@ -13,7 +13,7 @@ SHA1_URL=$(DOWNLOAD_URL)/$(NAME)-$(VERSION).tar.gz.sha1
 TARBALL_SHA1=$(shell curl -s "$(SHA1_URL)")
 
 
-all: build size testmake
+all: build size test
 
 dockerfile: ## Update Dockerfiles
 	@echo "===> Getting $(NAME) tarball sha1 for version: $(VERSION)"
