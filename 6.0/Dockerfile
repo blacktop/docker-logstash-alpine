@@ -2,32 +2,32 @@ FROM alpine:3.6
 
 LABEL maintainer "https://github.com/blacktop"
 
-RUN apk add --no-cache openjdk8-jre tini su-exec
+RUN apk add --no-cache openjdk8-jre su-exec
 
-ENV LS_VERSION 6.0.0-beta2
-ENV LOGSTASH_URL "https://artifacts.elastic.co/downloads/logstash"
-ENV LOGSTASH_TARBALL "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz"
-ENV LOGSTASH_TARBALL_ASC "$LOGSTASH_URL/logstash-${LS_VERSION}.tar.gz.asc"
-ENV LOGSTASH_TARBALL_SHA1 "e54892814681d08db1e57ab65e94c7fa74cb374a"
+ENV VERSION 6.0.0-rc1
+ENV URL "https://artifacts.elastic.co/downloads/logstash"
+ENV TARBALL "$URL/logstash-${VERSION}.tar.gz"
+ENV TARBALL_ASC "$URL/logstash-${VERSION}.tar.gz.asc"
+ENV TARBALL_SHA "790ae9db17975bdc14050366bfa99c88aa7f57ae7823d12a7ddd7dd3a516216a15067d65d8b4ad678688256b26c4ad28f9a1bef16fb026addec24a2a9d824b4c"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache libzmq bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && cd /tmp \
-  && wget -O logstash.tar.gz "$LOGSTASH_TARBALL"; \
-  if [ "$LOGSTASH_TARBALL_SHA1" ]; then \
-		echo "$LOGSTASH_TARBALL_SHA1 *logstash.tar.gz" | sha1sum -c -; \
+  && wget --progress=bar:force -O logstash.tar.gz "$TARBALL"; \
+  if [ "$TARBALL_SHA" ]; then \
+		echo "$TARBALL_SHA *logstash.tar.gz" | sha512sum -c -; \
 	fi; \
 	\
-	if [ "$LOGSTASH_TARBALL_ASC" ]; then \
-		wget -O logstash.tar.gz.asc "$LOGSTASH_TARBALL_ASC"; \
+	if [ "$TARBALL_ASC" ]; then \
+		wget --progress=bar:force -O logstash.tar.gz.asc "$TARBALL_ASC"; \
 		export GNUPGHOME="$(mktemp -d)"; \
 		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY"; \
 		gpg --batch --verify logstash.tar.gz.asc logstash.tar.gz; \
 		rm -r "$GNUPGHOME" logstash.tar.gz.asc; \
 	fi; \
   tar -xzf logstash.tar.gz \
-  && mv logstash-$LS_VERSION /usr/share/logstash \
+  && mv logstash-$VERSION /usr/share/logstash \
   && adduser -DH -s /sbin/nologin logstash \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
