@@ -16,9 +16,9 @@ TARBALL_SHA=$(shell curl -s "$(SHA_URL)")
 all: build size test
 
 dockerfile: ## Update Dockerfiles
-	@echo "===> Getting $(NAME) tarball sha1 for version: $(VERSION)"
+	@echo "===> Getting $(NAME) tarball-sha for version: $(VERSION)"
 	@echo " * TARBALL_SHA=$(TARBALL_SHA)"
-	sed -i.bu 's/TARBALL_SHA "[0-9a-f.]\{40\}"/TARBALL_SHA "$(TARBALL_SHA)"/' $(BUILD)/Dockerfile
+	sed -i.bu 's/TARBALL_SHA "[0-9a-f.]\{128\}"/TARBALL_SHA "$(TARBALL_SHA)"/' $(BUILD)/Dockerfile
 
 build: dockerfile ## Build docker image
 	cd $(BUILD); docker build -t $(ORG)/$(NAME):$(BUILD) .
