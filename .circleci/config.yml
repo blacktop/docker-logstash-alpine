@@ -47,5 +47,8 @@ jobs:
       - run:
           name: Run test
           command: |
-            set -x
-            docker run -d app logstash -e 'input { http { } } output { stdout { codec => line { format => "%{message}" }} }'
+            set +o pipefail
+            docker run -d --name logstash app logstash -e 'input { http { } } output { stdout { codec => line { format => "%{message}" }} }'
+            docker inspect -f {{.State.Running}} logstash
+            docker inspect -f {{.State.ExitCode}} logstash
+            docker exec logstash true
