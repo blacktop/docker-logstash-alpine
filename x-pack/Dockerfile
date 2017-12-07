@@ -4,15 +4,16 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk8-jre su-exec
 
-ENV VERSION 6.0.0
+ENV VERSION 6.0.1
 ENV URL "https://artifacts.elastic.co/downloads/logstash"
 ENV TARBALL "$URL/logstash-${VERSION}.tar.gz"
 ENV TARBALL_ASC "$URL/logstash-${VERSION}.tar.gz.asc"
-ENV TARBALL_SHA "0b35057a7308152de43927f06fbe0198c5c3135d9fa0dec1b48feeea084ecc04b3f6852c9c0239f6f854f5ea0a7a2cd33432a9faddbd6b523f2de336c8b21aaf  logstash-6.0.0.tar.gz"
+ENV TARBALL_SHA "9077e9b00c3f9694c302ef051070579b0d092bca50a36d8b6b2473fdf5772c2a234f09bef1ed99afe44b05fbb50d6bab50c58cb02155c66ddc2f90b8d3125834"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache libzmq bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
+  && set -e \
   && cd /tmp \
   && wget --progress=bar:force -O logstash.tar.gz "$TARBALL"; \
   if [ "$TARBALL_SHA" ]; then \
@@ -24,7 +25,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
 		export GNUPGHOME="$(mktemp -d)"; \
 		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY"; \
 		gpg --batch --verify logstash.tar.gz.asc logstash.tar.gz; \
-		rm -r "$GNUPGHOME" logstash.tar.gz.asc; \
+		rm -rf "$GNUPGHOME" logstash.tar.gz.asc; \
 	fi; \
   tar -xzf logstash.tar.gz \
   && mv logstash-$VERSION /usr/share/logstash \

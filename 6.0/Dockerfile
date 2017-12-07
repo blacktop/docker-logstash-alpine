@@ -13,6 +13,7 @@ ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache libzmq bash libc6-compat
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
+  && set -e \
   && cd /tmp \
   && wget --progress=bar:force -O logstash.tar.gz "$TARBALL"; \
   if [ "$TARBALL_SHA" ]; then \
@@ -24,7 +25,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
 		export GNUPGHOME="$(mktemp -d)"; \
 		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY"; \
 		gpg --batch --verify logstash.tar.gz.asc logstash.tar.gz; \
-		rm -r "$GNUPGHOME" logstash.tar.gz.asc; \
+		rm -rf "$GNUPGHOME" logstash.tar.gz.asc; \
 	fi; \
   tar -xzf logstash.tar.gz \
   && mv logstash-$VERSION /usr/share/logstash \
