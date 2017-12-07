@@ -10,7 +10,7 @@ VERSION=$(shell cat "$(BUILD)/Dockerfile" | grep '^ENV VERSION' | cut -d" " -f3)
 # tarball info
 DOWNLOAD_URL=https://artifacts.elastic.co/downloads/$(NAME)
 SHA_URL=$(DOWNLOAD_URL)/$(NAME)-$(VERSION).tar.gz.sha512
-TARBALL_SHA=$(shell curl -s "$(SHA_URL)")
+TARBALL_SHA=$(shell curl -s "$(SHA_URL)" | cut -d" " -f1)
 
 
 all: build size test
