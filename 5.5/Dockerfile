@@ -22,7 +22,9 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
 	if [ "$LOGSTASH_TARBALL_ASC" ]; then \
 		wget --progress=bar:force -O logstash.tar.gz.asc "$LOGSTASH_TARBALL_ASC"; \
 		export GNUPGHOME="$(mktemp -d)"; \
-		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY"; \
+    ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
+      || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
+      || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
 		gpg --batch --verify logstash.tar.gz.asc logstash.tar.gz; \
 		rm -r "$GNUPGHOME" logstash.tar.gz.asc; \
 	fi; \

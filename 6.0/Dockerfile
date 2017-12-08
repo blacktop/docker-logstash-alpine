@@ -26,7 +26,6 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
     ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
       || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
       || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
-		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY"; \
 		gpg --batch --verify logstash.tar.gz.asc logstash.tar.gz; \
 		rm -rf "$GNUPGHOME" logstash.tar.gz.asc; \
 	fi; \
