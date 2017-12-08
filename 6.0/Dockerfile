@@ -11,9 +11,9 @@ ENV TARBALL_ASC "$URL/logstash-${VERSION}.tar.gz.asc"
 ENV TARBALL_SHA "9077e9b00c3f9694c302ef051070579b0d092bca50a36d8b6b2473fdf5772c2a234f09bef1ed99afe44b05fbb50d6bab50c58cb02155c66ddc2f90b8d3125834"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
-RUN apk add --no-cache libzmq bash libc6-compat
+RUN apk add --no-cache libzmq bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
-  && set -e \
+  && set -ex \
   && cd /tmp \
   && wget --progress=bar:force -O logstash.tar.gz "$TARBALL"; \
   if [ "$TARBALL_SHA" ]; then \
@@ -27,13 +27,15 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
       || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
       || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
 		gpg --batch --verify logstash.tar.gz.asc logstash.tar.gz; \
-		rm -rf "$GNUPGHOME" logstash.tar.gz.asc; \
+		rm -rf "$GNUPGHOME" logstash.tar.gz.asc || true; \
 	fi; \
   tar -xzf logstash.tar.gz \
   && mv logstash-$VERSION /usr/share/logstash \
   && adduser -DH -s /sbin/nologin logstash \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
+
+RUN add --no-cache libc6-compat
 
 ENV PATH /usr/share/logstash/bin:/sbin:$PATH
 ENV LS_SETTINGS_DIR /usr/share/logstash/config
