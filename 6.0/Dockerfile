@@ -35,7 +35,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
-RUN add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat
 
 ENV PATH /usr/share/logstash/bin:/sbin:$PATH
 ENV LS_SETTINGS_DIR /usr/share/logstash/config
