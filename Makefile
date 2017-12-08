@@ -3,12 +3,12 @@ ORG=blacktop
 NAME=logstash
 # build info
 BUILD ?=$(shell cat LATEST)
+BUILDS=6.0 5.6 x-pack
 LATEST ?=$(shell cat LATEST)
 
 
 all: update build size test
 
-BUILDS=6.0 5.6 x-pack
 .PHONY: update
 update:
 	$(foreach build,$(BUILDS),NAME=$(NAME) BUILD=$(build) $(MAKE) dockerfile;)
@@ -29,9 +29,10 @@ ifeq "$(BUILD)" "$(LATEST)"
 endif
 	sed -i.bu '/$(BUILD)/ s/[0-9.]\{3,5\}MB/$(shell docker images --format "{{.Size}}" $(ORG)/$(NAME):$(BUILD))/' README.md
 
-.PHONY: tags
-tags:
-	docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" $(ORG)/$(NAME)
+.PHONY: tag
+tag:
+	@echo "===> Creating Tags"
+	$(foreach build,$(BUILDS),BUILD=$(build) hack/make/release;)
 
 .PHONY: test
 test: stop ## Test docker image
