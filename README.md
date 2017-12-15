@@ -15,6 +15,7 @@ Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker I
 ```bash
 REPOSITORY          TAG                 SIZE
 blacktop/logstash   latest              285MB
+blacktop/logstash   6.1                 285MB
 blacktop/logstash   6.0                 285MB
 blacktop/logstash   5.6                 278MB
 blacktop/logstash   5.5                 263MB
