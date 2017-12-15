@@ -6,7 +6,7 @@ RUN apk-install openjdk8-jre tini su-exec
 
 ENV LOGSTASH 2.3.4
 
-RUN apk-install libzmq bash
+RUN apk-install libzmq bash libc6-compat
 RUN mkdir -p /usr/local/lib \
 	&& ln -s /usr/lib/*/libzmq.so.3 /usr/local/lib/libzmq.so
 RUN apk-install -t build-deps wget ca-certificates \
