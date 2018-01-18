@@ -8,7 +8,7 @@ ENV VERSION 5.6.6
 ENV URL "https://artifacts.elastic.co/downloads/logstash"
 ENV TARBALL "$URL/logstash-${VERSION}.tar.gz"
 ENV TARBALL_ASC "$URL/logstash-${VERSION}.tar.gz.asc"
-ENV TARBALL_SHA "d7f4e29efb821a766216c4ff5504224fc93d126e383b39e687299be7f9c94b7e940273d4339eee08c82c40d36c08e2f87c1572894bad519dd28da132b58e88e1"
+ENV TARBALL_SHA "2bdeabe3710c4d23ceec849a9f601ff9760cc3fff398a6abfdb2bcee2d4ffdd3de294093108eddc91bf7dba0e66858713cf2182c60c148a37e7c0c8e5c5b1873"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache libzmq bash libc6-compat
