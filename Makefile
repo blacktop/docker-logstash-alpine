@@ -3,7 +3,7 @@ ORG=blacktop
 NAME=logstash
 # build info
 BUILD ?=$(shell cat LATEST)
-BUILDS=6.1 6.0 5.6 x-pack
+BUILDS=6.2 6.1 6.0 5.6 x-pack
 LATEST ?=$(shell cat LATEST)
 
 
