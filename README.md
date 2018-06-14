@@ -1,23 +1,21 @@
 ![logstash-logo](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/logstash-logo.png)
 
-docker-logstash-alpine
-======================
+# docker-logstash-alpine
 
 [![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Image](https://img.shields.io/badge/docker%20image-338MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
 
 Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker Image
 
-Dependencies
-------------
+## Dependencies
 
--	[alpine:3.7](https://hub.docker.com/_/alpine/)
+- [alpine:3.7](https://hub.docker.com/_/alpine/)
 
-Image Tags
-----------
+## Image Tags
 
 ```bash
 REPOSITORY          TAG                 SIZE
 blacktop/logstash   latest              338MB
+blacktop/logstash   6.3                 338MB
 blacktop/logstash   6.2                 337MB
 blacktop/logstash   6.1                 300MB
 blacktop/logstash   6.0                 285MB
@@ -34,8 +32,7 @@ blacktop/logstash   2.3                 255.8MB
 blacktop/logstash   1.5                 253.5MB
 ```
 
-Getting Started
----------------
+## Getting Started
 
 Start Logstash with configuration file
 
@@ -63,7 +60,7 @@ $ docker run -d --name logstash -p 5044:5044 --link elastic:elasticsearch blackt
                    document_type => "%{[@metadata][type]}"
                  }
                }'
-$ ./scripts/import_dashboards               
+$ ./scripts/import_dashboards
 $ ./metricbeat -e -c metricbeat.yml
 ```
 
@@ -77,32 +74,26 @@ Click on **Dashboard** -> **Open** -> `Metricbeat-cpu`
 
 ![kibana](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/kibana.png)
 
-Documentation
--------------
+## Documentation
 
-Issues
-------
+## Issues
 
 Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/blacktop/docker-logstash-alpine/issues/new)
 
-Credits
--------
+## Credits
 
 Heavily (if not entirely) influenced by https://github.com/docker-library/logstash
 
-CHANGELOG
----------
+## CHANGELOG
 
 See [`CHANGELOG.md`](https://github.com/blacktop/docker-logstash-alpine/blob/master/CHANGELOG.md)
 
-Contributing
-------------
+## Contributing
 
 [See all contributors on GitHub](https://github.com/blacktop/docker-logstash-alpine/graphs/contributors).
 
 Please update the [CHANGELOG.md](https://github.com/blacktop/docker-logstash-alpine/blob/master/CHANGELOG.md) and submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests/).
 
-License
--------
+## License
 
 MIT Copyright (c) 2016-2018 **blacktop**
