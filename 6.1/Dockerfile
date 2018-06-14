@@ -5,9 +5,9 @@ LABEL maintainer "https://github.com/blacktop"
 RUN apk add --no-cache openjdk8-jre su-exec
 
 ENV VERSION 6.1.4
-ENV URL "https://artifacts.elastic.co/downloads/logstash"
-ENV TARBALL "$URL/logstash-${VERSION}.tar.gz"
-ENV TARBALL_ASC "$URL/logstash-${VERSION}.tar.gz.asc"
+ENV DOWNLOAD_URL https://artifacts.elastic.co/downloads/logstash
+ENV TARBALL "${DOWNLOAD_URL}/logstash-${VERSION}.tar.gz"
+ENV TARBALL_ASC "${DOWNLOAD_URL}/logstash-${VERSION}.tar.gz.asc"
 ENV TARBALL_SHA "5a4eea6e53d22033b9ae1bc8939051ba66ea3727d38bd8b790ce0d45604bf95bce567da4a6e0dadfd6ac5bd0fd710ea7abc774ac0441f15402cced1375b08a75"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
