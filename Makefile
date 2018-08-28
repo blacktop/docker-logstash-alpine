@@ -2,10 +2,9 @@ REPO=blacktop/logstash
 ORG=blacktop
 NAME=logstash
 # build info
-BUILD ?=$(shell cat LATEST)
-BUILDS=6.3 6.2 6.1 6.0 5.6 x-pack
-LATEST ?=$(shell cat LATEST)
-
+LATEST?=$(shell cat LATEST)
+BUILD?=$(LATEST)
+BUILDS=$(LATEST) 6.3 6.2 6.1 6.0 5.6 x-pack
 
 all: update build size test
 
