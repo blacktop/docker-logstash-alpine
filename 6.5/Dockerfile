@@ -35,8 +35,11 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
+RUN apk add --no-cache libc6-compat
+
 ENV PATH /usr/share/logstash/bin:/sbin:$PATH
 ENV LS_SETTINGS_DIR /usr/share/logstash/config
+ENV LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8'
 
 RUN set -ex; \
   if [ -f "$LS_SETTINGS_DIR/log4j2.properties" ]; then \
@@ -46,7 +49,11 @@ RUN set -ex; \
 
 VOLUME ["/etc/logstash/conf.d"]
 
+COPY config/logstash /usr/share/logstash/config/
+COPY config/pipeline/default.conf /usr/share/logstash/pipeline/logstash.conf
 COPY logstash-entrypoint.sh /
+
+EXPOSE 9600 5044
 
 ENTRYPOINT ["/logstash-entrypoint.sh"]
 CMD ["-e", ""]
