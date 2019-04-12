@@ -2,19 +2,20 @@
 
 # docker-logstash-alpine
 
-[![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Image](https://img.shields.io/badge/docker%20image-393MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
+[![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Image](https://img.shields.io/badge/docker%20image-384MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
 
 Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker Image
 
 ## Dependencies
 
-- [alpine:3.7](https://hub.docker.com/_/alpine/)
+- [alpine:3.9](https://hub.docker.com/_/alpine/)
 
 ## Image Tags
 
 ```bash
 REPOSITORY          TAG                 SIZE
-blacktop/logstash   latest              393MB
+blacktop/logstash   latest              384MB
+blacktop/logstash   7.0                 384MB
 blacktop/logstash   6.7                 393MB
 blacktop/logstash   6.6                 389MB
 blacktop/logstash   6.5                 378MB
