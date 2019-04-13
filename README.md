@@ -26,7 +26,7 @@ blacktop/logstash   6.1                 300MB
 blacktop/logstash   6.0                 285MB
 blacktop/logstash   5.6                 278MB
 blacktop/logstash   5.5                 263MB
-blacktop/logstash   x-pack              337MB
+blacktop/logstash   x-pack              384MB
 blacktop/logstash   5.4                 263MB
 blacktop/logstash   5.3                 289MB
 blacktop/logstash   5.2                 289MB
