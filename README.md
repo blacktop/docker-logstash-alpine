@@ -2,20 +2,20 @@
 
 # docker-logstash-alpine
 
-[![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Image](https://img.shields.io/badge/docker%20image-394MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
+[![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Image](https://img.shields.io/badge/docker%20image-392MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
 
 Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker Image
 
 ## Dependencies
 
-- [alpine:3.10](https://hub.docker.com/_/alpine/)
+* [alpine:3.10](https://hub.docker.com/_/alpine/)
 
 ## Image Tags
 
-```bash
+``` bash
 REPOSITORY          TAG                 SIZE
-blacktop/logstash   latest              394MB
-blacktop/logstash   7.3                 394MB
+blacktop/logstash   latest              392MB
+blacktop/logstash   7.3                 392MB
 blacktop/logstash   7.2                 390MB
 blacktop/logstash   7.1                 390MB
 blacktop/logstash   7.0                 384MB
@@ -45,13 +45,13 @@ blacktop/logstash   1.5                 253.5MB
 
 Start Logstash with configuration file
 
-```bash
+``` bash
 $ docker run -d -v "$PWD":/config-dir blacktop/logstash logstash -f /config-dir/logstash.conf
 ```
 
 Start Logstash with commandline configuration. Download [metricbeat](https://www.elastic.co/downloads/beats/metricbeat)
 
-```bash
+``` bash
 $ docker run -d --name elastic -p 9200:9200 blacktop/elasticsearch
 $ docker run -d --name kibana --link elastic:elasticsearch -p 5601:5601 blacktop/kibana
 $ docker run -d --name logstash -p 5044:5044 --link elastic:elasticsearch blacktop/logstash \
@@ -60,7 +60,7 @@ $ docker run -d --name logstash -p 5044:5044 --link elastic:elasticsearch blackt
                     port => 5044
                   }
                }
-
+    
                output {
                  elasticsearch {
                    hosts => "elasticsearch:9200"
@@ -79,7 +79,7 @@ Click on `metricbeat-*` and :star: **Set as default index**
 
 ![index](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/index.png)
 
-Click on **Dashboard** -> **Open** -> `Metricbeat-cpu`
+Click on **Dashboard** -> **Open** -> `Metricbeat-cpu` 
 
 ![kibana](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/kibana.png)
 
@@ -93,16 +93,7 @@ Find a bug? Want more features? Find something missing in the documentation? Let
 
 Heavily (if not entirely) influenced by https://github.com/docker-library/logstash
 
-## CHANGELOG
-
-See [`CHANGELOG.md`](https://github.com/blacktop/docker-logstash-alpine/blob/master/CHANGELOG.md)
-
-## Contributing
-
-[See all contributors on GitHub](https://github.com/blacktop/docker-logstash-alpine/graphs/contributors).
-
-Please update the [CHANGELOG.md](https://github.com/blacktop/docker-logstash-alpine/blob/master/CHANGELOG.md) and submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests/).
-
 ## License
 
 MIT Copyright (c) 2016-2019 **blacktop**
+

@@ -6,9 +6,9 @@ RUN apk add --no-cache openjdk8-jre su-exec
 
 ENV VERSION 7.3.1
 ENV DOWNLOAD_URL https://artifacts.elastic.co/downloads/logstash
-ENV TARBALL "${DOWNLOAD_URL}/logstash-${VERSION}.tar.gz"
-ENV TARBALL_ASC "${DOWNLOAD_URL}/logstash-${VERSION}.tar.gz.asc"
-ENV TARBALL_SHA "b44a8557b7bcd5221823abad81facb184c531b1c4eb127b96e872e164f093eca9031f2b4fe7d0671600fee7b21369cb32f29bfeff9c4176df0de53d976468691"
+ENV TARBALL "${DOWNLOAD_URL}/logstash-oss-${VERSION}.tar.gz"
+ENV TARBALL_ASC "${DOWNLOAD_URL}/logstash-oss-${VERSION}.tar.gz.asc"
+ENV TARBALL_SHA "911b64318183a426ce1c6bc842799d2eabcb40fbf1358815374d73d587c4f53a220687a1dcc6eff49ad0c2d1d3d1f08409881c27263c4345224ead22df5fb1aa"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache libzmq bash
