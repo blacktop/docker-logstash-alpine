@@ -6,9 +6,9 @@ RUN apk add --no-cache openjdk8-jre su-exec
 
 ENV VERSION 7.4.0
 ENV DOWNLOAD_URL https://artifacts.elastic.co/downloads/logstash
-ENV TARBALL "${DOWNLOAD_URL}/logstash-${VERSION}.tar.gz"
-ENV TARBALL_ASC "${DOWNLOAD_URL}/logstash-${VERSION}.tar.gz.asc"
-ENV TARBALL_SHA "4bfce16769c9d5deceb24cf4e304966fba3b8f92af69c98407a88159012c7de6305f4a9fcff7ebea49b3c4c271d5cd51b2638ca1780d654643a364c8d369be05"
+ENV TARBALL "${DOWNLOAD_URL}/logstash-oss-${VERSION}.tar.gz"
+ENV TARBALL_ASC "${DOWNLOAD_URL}/logstash-oss-${VERSION}.tar.gz.asc"
+ENV TARBALL_SHA "11ecf6110f018f4684bc585eeb687b56e875c7fe92e20c880f0c1f26e8bfebbba2ba36451f1c08a51cfa9d5f6c4580535d8d559c7289d6ab6f33a23febbed849"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 RUN apk add --no-cache libzmq bash
@@ -35,8 +35,11 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
+RUN apk add --no-cache libc6-compat
+
 ENV PATH /usr/share/logstash/bin:/sbin:$PATH
 ENV LS_SETTINGS_DIR /usr/share/logstash/config
+ENV LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8'
 
 RUN set -ex; \
   if [ -f "$LS_SETTINGS_DIR/log4j2.properties" ]; then \
@@ -46,7 +49,12 @@ RUN set -ex; \
 
 VOLUME ["/etc/logstash/conf.d"]
 
+COPY config/logstash /usr/share/logstash/config/
+COPY config/pipeline/default.conf /usr/share/logstash/pipeline/logstash.conf
 COPY logstash-entrypoint.sh /
+RUN chmod +x /logstash-entrypoint.sh
+
+EXPOSE 9600 5044
 
 ENTRYPOINT ["/logstash-entrypoint.sh"]
 CMD ["-e", ""]

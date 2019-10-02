@@ -2,7 +2,7 @@
 
 # docker-logstash-alpine
 
-[![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Image](https://img.shields.io/badge/docker%20image-392MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
+[![CircleCI](https://circleci.com/gh/blacktop/docker-logstash-alpine.png?style=shield)](https://circleci.com/gh/blacktop/docker-logstash-alpine) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacktop/logstash.svg)](https://hub.docker.com/r/blacktop/logstash/) [![Docker Image](https://img.shields.io/badge/docker%20image-394MB-blue.svg)](https://hub.docker.com/r/blacktop/logstash/)
 
 Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker Image
 
@@ -14,7 +14,8 @@ Alpine Linux based [Logstash](https://www.elastic.co/products/logstash) Docker I
 
 ``` bash
 REPOSITORY          TAG                 SIZE
-blacktop/logstash   latest              392MB
+blacktop/logstash   latest              394MB
+blacktop/logstash   7.4                 394MB
 blacktop/logstash   7.3                 392MB
 blacktop/logstash   7.2                 390MB
 blacktop/logstash   7.1                 390MB
@@ -60,7 +61,7 @@ $ docker run -d --name logstash -p 5044:5044 --link elastic:elasticsearch blackt
                     port => 5044
                   }
                }
-    
+
                output {
                  elasticsearch {
                    hosts => "elasticsearch:9200"
@@ -79,7 +80,7 @@ Click on `metricbeat-*` and :star: **Set as default index**
 
 ![index](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/index.png)
 
-Click on **Dashboard** -> **Open** -> `Metricbeat-cpu` 
+Click on **Dashboard** -> **Open** -> `Metricbeat-cpu`
 
 ![kibana](https://raw.githubusercontent.com/blacktop/docker-logstash-alpine/master/docs/kibana.png)
 
