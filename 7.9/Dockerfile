@@ -6,10 +6,16 @@ RUN apk add --no-cache openjdk8-jre su-exec
 
 ENV VERSION 7.9.1
 ENV DOWNLOAD_URL https://artifacts.elastic.co/downloads/logstash
-ENV TARBALL "${DOWNLOAD_URL}/logstash-${VERSION}.tar.gz"
-ENV TARBALL_ASC "${DOWNLOAD_URL}/logstash-${VERSION}.tar.gz.asc"
-ENV TARBALL_SHA "d7e359523f4a7deba095d6a1a71f141c29ecc4cf58cdd5f81ea5af80d30be9716b1a9c824d4fc000cafc9457cf7d587d346fd8b1d0d04411a7fd8d280054671d"
+ENV TARBALL "${DOWNLOAD_URL}/logstash-oss-${VERSION}.tar.gz"
+ENV TARBALL_ASC "${DOWNLOAD_URL}/logstash-oss-${VERSION}.tar.gz.asc"
+ENV TARBALL_SHA "ddd6c0db8b59b9ad719a69f04eea81e0261061b5a26569819d4c9306c6f3a63acf575bf50e5f22b17e9b44ed8750d83762b41b866a25b2a2e283b5186c9cdf61"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
+
+# Provide a non-root user to run the process.
+RUN addgroup --gid 1000 logstash && \
+  adduser -u 1000 -G logstash \
+  -h /usr/share/logstash -H -D \
+  logstash
 
 RUN apk add --no-cache libzmq bash
 RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
@@ -31,12 +37,19 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg openssl \
   fi; \
   tar -xzf logstash.tar.gz \
   && mv logstash-$VERSION /usr/share/logstash \
-  && adduser -DH -s /sbin/nologin logstash \
+  && chown --recursive logstash:logstash /usr/share/logstash/ \
+  && chown -R logstash:root /usr/share/logstash \
+  && chmod -R g=u /usr/share/logstash \
+  && find /usr/share/logstash -type d -exec chmod g+s {} \; \
+  && ln -s /usr/share/logstash /opt/logstash \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
+RUN apk add --no-cache libc6-compat
+
 ENV PATH /usr/share/logstash/bin:/sbin:$PATH
 ENV LS_SETTINGS_DIR /usr/share/logstash/config
+ENV LANG='en_US.UTF-8' LC_ALL='en_US.UTF-8'
 
 RUN set -ex; \
   if [ -f "$LS_SETTINGS_DIR/log4j2.properties" ]; then \
@@ -44,9 +57,17 @@ RUN set -ex; \
   truncate -s 0 "$LS_SETTINGS_DIR/log4j2.properties"; \
   fi
 
-VOLUME ["/etc/logstash/conf.d"]
+WORKDIR /usr/share/logstash
 
+COPY config/logstash /usr/share/logstash/config/
+COPY config/pipeline/default.conf /usr/share/logstash/pipeline/logstash.conf
 COPY logstash-entrypoint.sh /
+RUN chmod +x /logstash-entrypoint.sh
+RUN chown --recursive logstash:root config/ pipeline/
+
+USER 1000
+
+EXPOSE 9600 5044
 
 ENTRYPOINT ["/logstash-entrypoint.sh"]
 CMD ["-e", ""]
