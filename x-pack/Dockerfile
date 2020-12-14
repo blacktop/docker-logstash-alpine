@@ -31,6 +31,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg1 openssl \
   fi; \
   tar -xzf logstash.tar.gz \
   && mv logstash-$VERSION /usr/share/logstash \
+  && rm -rf /usr/share/logstash/jdk \
   && adduser -DH -s /sbin/nologin logstash \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps

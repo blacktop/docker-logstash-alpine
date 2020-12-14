@@ -37,6 +37,7 @@ RUN apk add --no-cache -t .build-deps wget ca-certificates gnupg1 openssl \
   fi; \
   tar -xzf logstash.tar.gz \
   && mv logstash-$VERSION /usr/share/logstash \
+  && rm -rf /usr/share/logstash/jdk \
   && chown --recursive logstash:logstash /usr/share/logstash/ \
   && chown -R logstash:root /usr/share/logstash \
   && chmod -R g=u /usr/share/logstash \
