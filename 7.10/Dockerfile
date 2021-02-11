@@ -4,11 +4,11 @@ LABEL maintainer "https://github.com/blacktop"
 
 RUN apk add --no-cache openjdk11-jre
 
-ENV VERSION 7.10.1
+ENV VERSION 7.10.2
 ENV DOWNLOAD_URL https://artifacts.elastic.co/downloads/logstash
 ENV TARBALL "${DOWNLOAD_URL}/logstash-oss-${VERSION}-linux-x86_64.tar.gz"
 ENV TARBALL_ASC "${DOWNLOAD_URL}/logstash-oss-${VERSION}-linux-x86_64.tar.gz.asc"
-ENV TARBALL_SHA "5ca7ca1f6403237b7b9b99b7ac4ec3b86198412088cdf48111adc8d91c256c280736c9603d94a593bb863701f4928a94ea3b24c2d69a6eb56aa5b3b52ce74a00"
+ENV TARBALL_SHA "5425483a7d3ec5ba186574940031a529efa683f452f5e3e38ffd9bd07771beabdd5c54a8147ed42fe761b700ea5c294018f1efb22fa6fdcf23189f2aea314b5b"
 ENV GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 
 # Provide a non-root user to run the process.
